@@ -71,16 +71,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Install packages (Ubuntu)  # Linux環境の依存ライブラリをインストール
-        if: matrix.os == 'ubuntu-18.04'
-        run: |
-          ci/github-actions/ubuntu-install-packages
-
-      - name: Install packages (macOS)  # macOS環境の依存ライブラリをインストール
-        if: matrix.os == 'macos-latest'
-        run: |
-          ci/github-actions/macos-install-packages
-
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
