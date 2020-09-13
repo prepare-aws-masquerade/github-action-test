@@ -116,7 +116,7 @@ jobs:
         run: strip "target/${{ matrix.target }}/release/github-action-test"
 
       - name: Strip release binary (arm)
-        if: matrix.build == 'linux-arm' && martix.target == 'arm-unknown-linux-gnueabihf'
+        if: matrix.build == 'linux-arm' && matrix.target == 'arm-unknown-linux-gnueabihf'
         run: |
           docker run --rm -v \\
             "$PWD/target:/target:Z" \\
