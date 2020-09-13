@@ -100,7 +100,7 @@ jobs:
 
       - name: Strip release binary (linux and macos)
         if: matrix.build == 'linux' || matrix.build == 'macos'
-        run: strip "target/${{ matrix.target }}/release/ut"
+        run: strip "target/${{ matrix.target }}/release/github-action-test"
 
       - name: Strip release binary (arm)
         if: matrix.build == 'linux-arm'
@@ -109,23 +109,23 @@ jobs:
             "$PWD/target:/target:Z" \\
             rustembedded/cross:arm-unknown-linux-gnueabihf \\
             arm-linux-gnueabihf-strip \\
-            /target/arm-unknown-linux-gnueabihf/release/ut
+            /target/arm-unknown-linux-gnueabihf/release/github-action-test
 
       - name: Build archive  # アーカイブにする。Windows環境だと7zコマンドが使える。
         shell: bash
         run: |
           # NOTE: Consider adding script files to do below operations.
-          staging="ut-${{ env.RELEASE_VERSION }}-${{ matrix.target }}"
+          staging="github-action-test-${{ env.RELEASE_VERSION }}-${{ matrix.target }}"
           mkdir -p "$staging"
 
           cp README.md LICENSE "$staging/"
 
           if [ "${{ matrix.os }}" = "windows-2019" ]; then
-            cp "target/${{ matrix.target }}/release/ut.exe" "$staging/"
+            cp "target/${{ matrix.target }}/release/github-action-test.exe" "$staging/"
             7z a "$staging.zip" "$staging"
             echo "::set-env name=ASSET::$staging.zip"
           else
-            cp "target/${{ matrix.target }}/release/ut" "$staging/"
+            cp "target/${{ matrix.target }}/release/github-action-test" "$staging/"
             tar czf "$staging.tar.gz" "$staging"
             echo "::set-env name=ASSET::$staging.tar.gz"
           fi
