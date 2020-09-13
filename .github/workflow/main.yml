@@ -128,7 +128,7 @@ jobs:
           staging="ut-${{ env.RELEASE_VERSION }}-${{ matrix.target }}"
           mkdir -p "$staging"
 
-          cp README.md LICENSE-MIT "$staging/"
+          cp README.md LICENSE "$staging/"
 
           if [ "${{ matrix.os }}" = "windows-2019" ]; then
             cp "target/${{ matrix.target }}/release/ut.exe" "$staging/"
