@@ -118,10 +118,10 @@ jobs:
       - name: Strip release binary (arm)
         if: matrix.build == 'linux-arm' && matrix.target == 'arm-unknown-linux-gnueabihf'
         run: |
-          docker run --rm -v \\
-            "$PWD/target:/target:Z" \\
-            rustembedded/cross:arm-unknown-linux-gnueabihf \\
-            arm-linux-gnueabihf-strip \\
+          docker run --rm -v \
+            "$PWD/target:/target:Z" \
+            rustembedded/cross:arm-unknown-linux-gnueabihf \
+            arm-linux-gnueabihf-strip \
             /target/arm-unknown-linux-gnueabihf/release/github-action-test
 
       - name: Build archive  # アーカイブにする。Windows環境だと7zコマンドが使える。
